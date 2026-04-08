@@ -1,0 +1,5 @@
+{
+  "name": "Hệ thống điểm danh",
+  "description": "A system for tracking attendance with admin management and user check-ins.",
+  "requestFramePermissions": []
+}

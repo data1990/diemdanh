@@ -1,0 +1,67 @@
+{
+  "entities": {
+    "Member": {
+      "title": "Member",
+      "description": "A person who needs to be tracked for attendance.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The full name of the member."
+        },
+        "department": {
+          "type": "string",
+          "description": "The department or group the member belongs to."
+        },
+        "createdAt": {
+          "type": "timestamp",
+          "description": "When the member was added."
+        }
+      },
+      "required": ["name", "department", "createdAt"]
+    },
+    "AttendanceRecord": {
+      "title": "Attendance Record",
+      "description": "A record of a member's attendance on a specific day.",
+      "type": "object",
+      "properties": {
+        "memberId": {
+          "type": "string",
+          "description": "The ID of the member."
+        },
+        "memberName": {
+          "type": "string",
+          "description": "The name of the member at the time of check-in."
+        },
+        "date": {
+          "type": "string",
+          "description": "The date of the check-in in YYYY-MM-DD format."
+        },
+        "timestamp": {
+          "type": "timestamp",
+          "description": "The exact time of the check-in."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["present", "late", "absent"],
+          "description": "The attendance status."
+        }
+      },
+      "required": ["memberId", "memberName", "date", "timestamp", "status"]
+    }
+  },
+  "firestore": {
+    "/members/{memberId}": {
+      "schema": {
+        "$ref": "#/entities/Member"
+      },
+      "description": "Stores the list of members to be tracked."
+    },
+    "/attendance/{recordId}": {
+      "schema": {
+        "$ref": "#/entities/AttendanceRecord"
+      },
+      "description": "Stores the attendance records."
+    }
+  }
+}
